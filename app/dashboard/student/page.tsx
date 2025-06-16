@@ -50,7 +50,7 @@ export default function StudentDashboard() {
 
   const handleLogout = () => {
     // In a real app, you would clear the session
-    localStorage.removeItem("user")
+    // localStorage.removeItem("user")
     router.push("/signin")
   }
 

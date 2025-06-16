@@ -46,7 +46,7 @@ export default function AmbulanceDashboard() {
 
   const handleLogout = () => {
     // In a real app, you would clear the session
-    localStorage.removeItem("user")
+    // localStorage.removeItem("user")
     router.push("/signin")
   }
 
@@ -70,6 +70,27 @@ export default function AmbulanceDashboard() {
 
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Video Feed</CardTitle>
+              <CardDescription>Live video feed from emergency location</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="aspect-video bg-black rounded-md overflow-hidden">
+                <video
+                  src="/videos/fixed-ambulance-path.mp4" // Make sure the file is in your /public directory
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader>
               <CardTitle>Emergency Response</CardTitle>
@@ -83,17 +104,6 @@ export default function AmbulanceDashboard() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Video Feed</CardTitle>
-              <CardDescription>Live video feed from emergency location</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-md flex items-center justify-center">
-                <p className="text-muted-foreground">No active video feed</p>
-              </div>
-            </CardContent>
-          </Card>
 
           <Card className="md:col-span-2">
             <CardHeader>

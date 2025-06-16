@@ -27,6 +27,9 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  experimental: {
+    allowedDevOrigins: ["192.168.43.106", "localhost"] // Add your IP and localhost
+  }
 }
 
 if (userConfig) {
@@ -47,5 +50,9 @@ if (userConfig) {
     }
   }
 }
+
+
+
+
 
 export default nextConfig

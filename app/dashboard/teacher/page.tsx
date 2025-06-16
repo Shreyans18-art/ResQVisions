@@ -8,11 +8,14 @@ import { Input } from "@/components/ui/input"
 import { Bell, Send, LogOut, AlertTriangle } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
+
 export default function TeacherDashboard() {
   const router = useRouter()
   const [message, setMessage] = useState("")
   const [notifications, setNotifications] = useState<string[]>([])
   const [user, setUser] = useState<{ name: string } | null>(null)
+const [videoIndex, setVideoIndex] = useState(0)
+
 
   useEffect(() => {
     // Check if user is logged in and is a teacher
@@ -56,7 +59,7 @@ export default function TeacherDashboard() {
 
   const handleLogout = () => {
     // In a real app, you would clear the session
-    localStorage.removeItem("user")
+    // localStorage.removeItem("user")
     router.push("/signin")
   }
 
@@ -80,6 +83,51 @@ export default function TeacherDashboard() {
 
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+
+
+<Card>
+  <CardHeader>
+    <CardTitle>Video Feed</CardTitle>
+    <CardDescription>Use arrows to switch between camera views</CardDescription>
+  </CardHeader>
+
+  <CardContent className="space-y-4">
+    <div className="aspect-video bg-black rounded-md overflow-hidden">
+      <video
+        src={videoIndex === 0 ? "/videos/original_crowd.mp4" : "/videos/fixed_without_path.mp4"}
+        controls
+        autoPlay
+        loop
+        className="w-full h-full object-cover"
+      />
+    </div>
+
+    <div className="flex items-center justify-center gap-4">
+      <Button
+        variant="outline"
+        disabled={videoIndex === 0}
+        onClick={() => setVideoIndex((prev) => Math.max(prev - 1, 0))}
+      >
+        ← Previous
+      </Button>
+      <span className="text-sm text-muted-foreground">
+        {/* {videoIndex === 0 ? "Camera 1" : "Camera 2"} */}
+      </span>
+      <Button
+        variant="outline"
+        disabled={videoIndex === 1}
+        onClick={() => setVideoIndex((prev) => Math.min(prev + 1, 1))}
+      >
+        Next →
+      </Button>
+    </div>
+  </CardContent>
+</Card>
+
+
+
+
           <Card>
             <CardHeader>
               <CardTitle>Emergency Alerts</CardTitle>
@@ -97,6 +145,8 @@ export default function TeacherDashboard() {
               </Button>
             </CardContent>
           </Card>
+
+        
 
           <Card>
             <CardHeader>
